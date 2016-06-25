@@ -11,7 +11,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     /**
      * Duration of wait before transferring the user to the UrlActivity
      **/
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
+    private final int SPLASH_DISPLAY_LENGTH = 1500;
 
     /**
      * Method that is called when the activity is created

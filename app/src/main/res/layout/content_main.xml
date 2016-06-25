@@ -13,12 +13,53 @@
     tools:context=".UI.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:id="@+id/textView"
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:maxLines = "40"
-        android:scrollbars = "vertical"
-        android:text="Hello World!"/>
+        android:id="@+id/main_swipe">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="60sp"
+                    android:textStyle="bold"
+                    tools:text="1,831,321"
+                    android:text=""
+                    android:id="@+id/signatureCount"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/signatureCount"
+                    android:textColor="@android:color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="signatures so far"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/text"/>
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+
+
+
+
+
 
 </RelativeLayout>
