@@ -282,7 +282,12 @@ public class MainActivity extends AppCompatActivity implements Callback {
     @Override
     public void onFailure(Call call, IOException e) {
         e.printStackTrace();
-//        mMaterialRefreshLayout.finishRefreshing();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mWaveSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         showToastMessage("Fail to get data from server. Try again.");
     }
 
@@ -290,9 +295,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
     public void onResponse(Call call, final Response response) throws IOException {
         if (!response.isSuccessful()) {
             showToastMessage("Fail to get data from server. Try again.");
-            if (mWaveSwipeRefreshLayout.isRefreshing()) {
-                mWaveSwipeRefreshLayout.setRefreshing(false);
-            }
+
             throw new IOException("Unexpected code " + response);
         }
         String jsonData = response.body().string();
