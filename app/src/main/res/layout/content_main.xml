@@ -20,4 +20,5 @@
         android:maxLines = "40"
         android:scrollbars = "vertical"
         android:text="Hello World!"/>
+
 </RelativeLayout>
