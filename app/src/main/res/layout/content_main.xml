@@ -14,9 +14,9 @@
     tools:showIn="@layout/activity_main">
 
     <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+        android:id="@+id/main_swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/main_swipe">
+        android:layout_height="match_parent">
 
 
         <ScrollView
@@ -29,37 +29,32 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:textColor="@android:color/black"
+                    android:id="@+id/signatureCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="60sp"
-                    android:textStyle="bold"
-                    tools:text="1,831,321"
+                    android:layout_centerHorizontal="true"
                     android:text="..."
-                    android:id="@+id/signatureCount"
-                    android:layout_centerHorizontal="true"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="68sp"
+                    android:textStyle="bold"
+                    tools:text="1,831,321"/>
 
                 <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@id/signatureCount"
-                    android:textColor="@android:color/black"
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
+                    android:layout_below="@id/signatureCount"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
                     android:lineSpacingExtra="5dp"
                     android:text="signatures so far"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/text"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="40sp"/>
 
             </RelativeLayout>
 
         </ScrollView>
     </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
-
-
-
-
 
 
 </RelativeLayout>

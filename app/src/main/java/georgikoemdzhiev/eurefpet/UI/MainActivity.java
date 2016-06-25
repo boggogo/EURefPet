@@ -1,9 +1,12 @@
 package georgikoemdzhiev.eurefpet.UI;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -70,12 +73,19 @@ public class MainActivity extends AppCompatActivity implements Callback {
             }
         });
 
+        Drawable fabDrawable = fab.getDrawable();
+        DrawableCompat.setTint(fabDrawable, Color.WHITE);
+
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
+        mWaveSwipeRefreshLayout.setWaveARGBColor(255,0,136,0);
+
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Do work to refresh the list here.
+
+//                mWaveSwipeRefreshLayout.setWaveColor(R.color.colorAccent); // Random assign
                 new Task().execute();
             }
         });
@@ -93,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 .build();
 
         mWaveSwipeRefreshLayout.setRefreshing(true);
+
+
         // get data from internet...
         getDataFromInternet();
     }

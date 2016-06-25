@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EURefCountry implements Serializable {
+public class EURefCountry implements Serializable, Comparable<EURefCountry> {
     public  String name;
     public  String code;
     public  int signature_count;
@@ -47,5 +47,16 @@ public class EURefCountry implements Serializable {
                 ", code='" + code + '\'' +
                 ", signature_count=" + signature_count +
                 '}';
+    }
+
+    @Override
+    public int compareTo(EURefCountry euRefCountry) {
+        if(signature_count == euRefCountry.getSignature_count()) {
+            return 0;
+        }else if(signature_count > euRefCountry.getSignature_count()){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

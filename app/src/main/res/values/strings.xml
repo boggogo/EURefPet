@@ -7,5 +7,12 @@
         official petition parliament page:</string>
     <string name="action_about">About</string>
     <string name="action_about_link"><a href="https://petition.parliament.uk/petitions/131215">link</a></string>
-    <string name="title_activity_details">Details</string>
+    <string name="title_activity_details">Country - Number - signatures</string>
+    <string-array name="query_suggestions">
+        <item>Android</item>
+        <item>iOS</item>
+        <item>SCALA</item>
+        <item>Ruby</item>
+        <item>JavaScript</item>
+    </string-array>
 </resources>
