@@ -3,6 +3,7 @@ package georgikoemdzhiev.eurefpet.UI;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import georgikoemdzhiev.eurefpet.R;
+import georgikoemdzhiev.eurefpet.Utils.Constants;
 import georgikoemdzhiev.eurefpet.Utils.EURefConstituency;
 import georgikoemdzhiev.eurefpet.Utils.EURefCountry;
 import georgikoemdzhiev.eurefpet.Utils.EURefData;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
     private Request request;
     private OkHttpClient client;
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
+    private FloatingActionButton fab;
+    private boolean finishedLoadingData = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,22 @@ public class MainActivity extends AppCompatActivity implements Callback {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
+//                Bundle extras = new Bundle();
+                intent.putExtra(Constants.KEY_EU_REF_OBJECT,mEURefData);
+                if(finishedLoadingData) {
+                    startActivity(new Intent(intent));
+                }else {
+                    showToastMessage("No data to show!");
+                }
+            }
+        });
+
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
@@ -266,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
             Log.d(TAG, mEURefData.toString());
 
-//            showToastMessage("Refresh complete!");
+            finishedLoadingData = true;
 
         } catch (JSONException | ParseException e) {
             showToastMessage("Fail to convert data from server. Try again.");

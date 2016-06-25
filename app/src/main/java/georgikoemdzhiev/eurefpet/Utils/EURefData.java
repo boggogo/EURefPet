@@ -1,9 +1,11 @@
 package georgikoemdzhiev.eurefpet.Utils;
 
+import java.io.Serializable;
+
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EURefData {
+public class EURefData implements Serializable{
     public  String links;
     public  int id;
     public  String type;

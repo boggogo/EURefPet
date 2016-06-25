@@ -1,12 +1,13 @@
 package georgikoemdzhiev.eurefpet.Utils;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EuRefAttr {
+public class EuRefAttr implements Serializable {
     public String action;
     public String background;
     public String additional_details;

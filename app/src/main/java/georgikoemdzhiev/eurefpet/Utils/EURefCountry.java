@@ -1,9 +1,11 @@
 package georgikoemdzhiev.eurefpet.Utils;
 
+import java.io.Serializable;
+
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EURefCountry {
+public class EURefCountry implements Serializable {
     public  String name;
     public  String code;
     public  int signature_count;

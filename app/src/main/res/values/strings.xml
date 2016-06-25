@@ -7,4 +7,5 @@
         official petition parliament page:</string>
     <string name="action_about">About</string>
     <string name="action_about_link"><a href="https://petition.parliament.uk/petitions/131215">link</a></string>
+    <string name="title_activity_details">Details</string>
 </resources>

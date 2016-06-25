@@ -35,7 +35,7 @@
                     android:textSize="60sp"
                     android:textStyle="bold"
                     tools:text="1,831,321"
-                    android:text=""
+                    android:text="..."
                     android:id="@+id/signatureCount"
                     android:layout_centerHorizontal="true"/>
 

@@ -1,9 +1,11 @@
 package georgikoemdzhiev.eurefpet.Utils;
 
+import java.io.Serializable;
+
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EURefConstituency {
+public class EURefConstituency implements Serializable {
     public String name;
     public String ons_code;
     public String mp;

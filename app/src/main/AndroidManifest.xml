@@ -26,10 +26,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:parentActivityName=".UI.MainActivity"
             android:name=".UI.AboutActivity"
             android:label="@string/title_activity_about"
+            android:parentActivityName=".UI.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".UI.DetailsActivity"
+            android:label="@string/title_activity_details"
+            android:parentActivityName=".UI.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="georgikoemdzhiev.eurefpet.UI.MainActivity"/>
         </activity>
     </application>
 
