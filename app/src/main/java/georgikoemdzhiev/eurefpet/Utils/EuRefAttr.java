@@ -1,4 +1,4 @@
-package georgikoemdzhiev.eurefpet;
+package georgikoemdzhiev.eurefpet.Utils;
 
 import java.util.Date;
 import java.util.List;

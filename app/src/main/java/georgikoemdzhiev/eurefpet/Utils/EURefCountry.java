@@ -1,4 +1,4 @@
-package georgikoemdzhiev.eurefpet;
+package georgikoemdzhiev.eurefpet.Utils;
 
 /**
  * Created by koemdzhiev on 25/06/16.

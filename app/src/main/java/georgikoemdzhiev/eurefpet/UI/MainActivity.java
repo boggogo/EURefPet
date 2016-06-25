@@ -1,4 +1,4 @@
-package georgikoemdzhiev.eurefpet;
+package georgikoemdzhiev.eurefpet.UI;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
+import georgikoemdzhiev.eurefpet.R;
+import georgikoemdzhiev.eurefpet.Utils.EURefConstituency;
+import georgikoemdzhiev.eurefpet.Utils.EURefCountry;
+import georgikoemdzhiev.eurefpet.Utils.EURefData;
+import georgikoemdzhiev.eurefpet.Utils.EuRefAttr;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
