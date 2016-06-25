@@ -2,6 +2,7 @@ package georgikoemdzhiev.eurefpet.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.AbsListView;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,10 +23,11 @@ import georgikoemdzhiev.eurefpet.Utils.EURefData;
 import georgikoemdzhiev.eurefpet.adapters.EURefCountryAdapter;
 
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity  {
     private static final String TAG = DetailsActivity.class.getSimpleName().toString();
     private EURefData mEURefData;
-    private RecyclerView rvContacts;
+    private RecyclerView mRecyclerView;
+    private FloatingActionButton fab;
 
 
     @Override
@@ -42,17 +45,40 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d(TAG, mEURefData.getAttributes().getSignatures_by_constituency().toString());
 
 // Lookup the recyclerview in activity layout
-        rvContacts = (RecyclerView) findViewById(R.id.rvContacts);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvContacts);
 
         sortDataByNumOfSing(mEURefData.getAttributes().getSignatures_by_country());
         // Create adapter passing in the sample user data
         EURefCountryAdapter adapter = new EURefCountryAdapter(mEURefData.getAttributes().getSignatures_by_country(), this);
         // Attach the adapter to the recyclerview to populate items
-        rvContacts.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
         // Set layout manager to position the items
-        rvContacts.setLayoutManager(new LinearLayoutManager(this));
-        // That's all!
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE){
+                    fab.show();
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 ||dy<0 && fab.isShown())
+                    fab.hide();
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+        // That's all!
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // change list's data
+            }
+        });
 
 
     }
@@ -87,7 +113,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

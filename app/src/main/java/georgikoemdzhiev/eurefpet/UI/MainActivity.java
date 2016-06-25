@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 }
             }
         });
-        mSigCount = (Button) findViewById(R.id.signBtn);
-        mSigCount.setOnClickListener(new View.OnClickListener() {
+        mSignButton = (Button) findViewById(R.id.signBtn);
+        mSignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String url = "https://petition.parliament.uk/petitions/131215/signatures/new";
@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
+//        mWaveSwipeRefreshLayout.setColorSchemeColors(android.R.color.white, R.color.colorPrimary);
         mWaveSwipeRefreshLayout.setWaveARGBColor(255,0,100,0);
+//        mWaveSwipeRefreshLayout.setBackgroundColor(getResources().getColor(android.R.color.white,getTheme()));
 
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override
