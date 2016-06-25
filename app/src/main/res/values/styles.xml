@@ -22,4 +22,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="signButtonTheme" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+    </style>
 </resources>

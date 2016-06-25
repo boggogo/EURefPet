@@ -3,6 +3,7 @@ package georgikoemdzhiev.eurefpet.UI;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
     private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
     private FloatingActionButton fab;
     private boolean finishedLoadingData = false;
+    private Button mSignButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +75,22 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 }
             }
         });
-
+        mSigCount = (Button) findViewById(R.id.signBtn);
+        mSigCount.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String url = "https://petition.parliament.uk/petitions/131215/signatures/new";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                });
         Drawable fabDrawable = fab.getDrawable();
         DrawableCompat.setTint(fabDrawable, Color.WHITE);
 
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
-        mWaveSwipeRefreshLayout.setWaveARGBColor(255,0,136,0);
+        mWaveSwipeRefreshLayout.setWaveARGBColor(255,0,100,0);
 
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
             @Override
