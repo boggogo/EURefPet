@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Version: 1.1"
+        android:text="Version: 1.0"
         android:id="@+id/version"
         android:layout_alignBottom="@+id/scrollView"
         android:layout_alignParentLeft="true"
