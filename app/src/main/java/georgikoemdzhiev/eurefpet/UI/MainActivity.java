@@ -1,5 +1,6 @@
 package georgikoemdzhiev.eurefpet.UI;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -223,7 +224,9 @@ public class MainActivity extends AppCompatActivity implements Callback {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            startActivity(intent);
             return true;
         }
 
