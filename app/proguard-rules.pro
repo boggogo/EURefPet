@@ -24,3 +24,6 @@
     public static int d(...);
     public static int e(...);
 }
+
+-keep class okio.** { *; }
+-dontwarn okio.**
