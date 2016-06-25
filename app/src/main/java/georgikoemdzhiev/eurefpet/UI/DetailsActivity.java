@@ -1,7 +1,6 @@
 package georgikoemdzhiev.eurefpet.UI;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,8 +23,20 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mEURefData = (EURefData) getIntent().getExtras().getSerializable(Constants.KEY_EU_REF_OBJECT);
 
-        Log.d(TAG,mEURefData.toString());
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Log.d(TAG,mEURefData.getAttributes().getSignatures_by_country().toString());
+        Log.d(TAG,"=======================================================");
+        Log.d(TAG,mEURefData.getAttributes().getSignatures_by_constituency().toString());
+
+
+
+
+
+
+
+
+
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
