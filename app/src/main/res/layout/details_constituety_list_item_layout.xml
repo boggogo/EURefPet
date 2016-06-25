@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/constituencyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paisley and Renfrewshire North"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+    <TextView
+        android:id="@+id/constituencyNumberOfSing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="130"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+    <TextView
+        android:id="@+id/mpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/constituencyName"
+        android:text="MP:"
+        android:textColor="@color/semiBlack"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/mpName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/constituencyName"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/mpTextView"
+        android:text="Angus Brendan MacNeil MP"
+        android:textSize="13sp"/>
+
+
+</RelativeLayout>

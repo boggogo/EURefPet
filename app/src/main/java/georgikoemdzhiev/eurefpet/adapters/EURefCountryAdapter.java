@@ -31,7 +31,7 @@ public class EURefCountryAdapter extends RecyclerView.Adapter<EURefCountryAdapte
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.details_list_item_layout, parent, false);
+        View contactView = inflater.inflate(R.layout.details_contry_list_item_layout, parent, false);
 
 
 

@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         @Override
         protected void onPostExecute(String[] result) {
             // Call setRefreshing(false) when the list has been refreshed.
-            mWaveSwipeRefreshLayout.setRefreshing(false);
+//            mWaveSwipeRefreshLayout.setRefreshing(false);
             super.onPostExecute(result);
         }
     }
@@ -313,7 +313,6 @@ public class MainActivity extends AppCompatActivity implements Callback {
             Log.d(TAG, mEURefData.toString());
 
             finishedLoadingData = true;
-
         } catch (JSONException | ParseException e) {
             showToastMessage("Fail to convert data from server. Try again.");
             e.printStackTrace();
@@ -321,16 +320,12 @@ public class MainActivity extends AppCompatActivity implements Callback {
         }
 
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (mWaveSwipeRefreshLayout.isRefreshing()) {
-                    mWaveSwipeRefreshLayout.setRefreshing(false);
-                }
-            }
-        });
-
-
+       runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               mWaveSwipeRefreshLayout.setRefreshing(false);
+           }
+       });
     }
 
 

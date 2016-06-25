@@ -18,16 +18,21 @@ import java.util.List;
 
 import georgikoemdzhiev.eurefpet.R;
 import georgikoemdzhiev.eurefpet.Utils.Constants;
+import georgikoemdzhiev.eurefpet.Utils.EURefConstituency;
 import georgikoemdzhiev.eurefpet.Utils.EURefCountry;
 import georgikoemdzhiev.eurefpet.Utils.EURefData;
+import georgikoemdzhiev.eurefpet.adapters.EURefConstituencyAdapter;
 import georgikoemdzhiev.eurefpet.adapters.EURefCountryAdapter;
 
 
-public class DetailsActivity extends AppCompatActivity  {
+public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = DetailsActivity.class.getSimpleName().toString();
     private EURefData mEURefData;
     private RecyclerView mRecyclerView;
     private FloatingActionButton fab;
+    private EURefCountryAdapter mContryAdapter;
+    private EURefConstituencyAdapter mEURefConstituencyAdapter;
+    private boolean isCountryAdapterSet = true;
 
 
     @Override
@@ -47,18 +52,19 @@ public class DetailsActivity extends AppCompatActivity  {
 // Lookup the recyclerview in activity layout
         mRecyclerView = (RecyclerView) findViewById(R.id.rvContacts);
 
-        sortDataByNumOfSing(mEURefData.getAttributes().getSignatures_by_country());
-        // Create adapter passing in the sample user data
-        EURefCountryAdapter adapter = new EURefCountryAdapter(mEURefData.getAttributes().getSignatures_by_country(), this);
-        // Attach the adapter to the recyclerview to populate items
-        mRecyclerView.setAdapter(adapter);
+        sortDataByNumOfSing(mEURefData.getAttributes().getSignatures_by_country(), mEURefData.getAttributes().getSignatures_by_constituency());
+        // Create mContryAdapter passing in the sample user data
+        mContryAdapter = new EURefCountryAdapter(mEURefData.getAttributes().getSignatures_by_country(), this);
+        mEURefConstituencyAdapter = new EURefConstituencyAdapter(mEURefData.getAttributes().getSignatures_by_constituency(), this);
+        // Attach the mContryAdapter to the recyclerview to populate items
+        mRecyclerView.setAdapter(mContryAdapter);
         // Set layout manager to position the items
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE){
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     fab.show();
                 }
                 super.onScrollStateChanged(recyclerView, newState);
@@ -66,7 +72,7 @@ public class DetailsActivity extends AppCompatActivity  {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 ||dy<0 && fab.isShown())
+                if (dy > 0 || dy < 0 && fab.isShown())
                     fab.hide();
                 super.onScrolled(recyclerView, dx, dy);
             }
@@ -77,14 +83,32 @@ public class DetailsActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 // change list's data
+
+                if (isCountryAdapterSet) {
+                    // current adapter is Country so set it to Constituency...
+                    mRecyclerView.setAdapter(mEURefConstituencyAdapter);
+
+                    // change title...
+                    getSupportActionBar().setTitle(getString(R.string.title_activity_details_constituency));
+                    isCountryAdapterSet = false;
+                } else {
+                    // current adapter is Constituency so set it to Country...
+                    mRecyclerView.setAdapter(mContryAdapter);
+                    // change title...
+                    getSupportActionBar().setTitle(getString(R.string.title_activity_details));
+
+                    isCountryAdapterSet = true;
+                }
+
             }
         });
 
 
     }
 
-    private void sortDataByNumOfSing(List<EURefCountry> signatures_by_country) {
+    private void sortDataByNumOfSing(List<EURefCountry> signatures_by_country, List<EURefConstituency> signatures_by_constituecy) {
         Collections.sort(signatures_by_country);
+        Collections.sort(signatures_by_constituecy);
     }
 
 

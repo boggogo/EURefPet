@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by koemdzhiev on 25/06/16.
  */
-public class EURefConstituency implements Serializable {
+public class EURefConstituency implements Serializable, Comparable<EURefConstituency>{
     public String name;
     public String ons_code;
     public String mp;
@@ -49,6 +49,17 @@ public class EURefConstituency implements Serializable {
 
     public void setSignature_count(int signature_count) {
         this.signature_count = signature_count;
+    }
+
+    @Override
+    public int compareTo(EURefConstituency euRefConstituency) {
+        if(signature_count == euRefConstituency.getSignature_count()) {
+            return 0;
+        }else if(signature_count > euRefConstituency.getSignature_count()){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 
     @Override
