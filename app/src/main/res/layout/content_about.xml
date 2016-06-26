@@ -84,6 +84,190 @@
                 android:layout_height="wrap_content"
                 android:text="@string/action_about_link"/>
 
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/link"
+                android:text="Petition Details"
+                android:id="@+id/petitionDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/createdAtCont"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/petitionDetails"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Created at: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/createdAt"
+                    android:text="Mon May 23 23:39:38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/updatedAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/createdAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Updated at: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/updatedAt"
+                    android:text="Sun Jun 26 13:27:58"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/openAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/updatedAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Open at: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/openAt"
+                    android:text="Wed May 25 11:19:56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/closedAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/openAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Closed at: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/closedAt"
+                    android:text="@string/n_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/governmentRespondedAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/closedAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Government response at: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/government_response_at"
+                    android:text="@string/n_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/scheduledDebateDateCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/governmentRespondedAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Scheduled debate date:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/scheduled_debate_date"
+                    android:text="@string/n_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rejectedAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/scheduledDebateDateCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Rejected at:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/rejected_at"
+                    android:text="@string/n_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/debateOutcomeAtCont"
+                android:layout_marginTop="1dp"
+                android:layout_below="@id/rejectedAtCont"
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Debate outcome at:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/debate_outcome_at"
+                    android:text="@string/n_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
         </RelativeLayout>
 
     </ScrollView>

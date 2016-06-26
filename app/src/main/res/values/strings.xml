@@ -11,4 +11,5 @@
     <string name="petition_created_by">Petition created by…</string>
     <string name="signPetitionLink">https://petition.parliament.uk/petitions/131215/signatures/new</string>
     <string name="petition_link">https://petition.parliament.uk/petitions/131215.json</string>
+    <string name="n_a">N/A</string>
 </resources>
