@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         mSignButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String url = "https://petition.parliament.uk/petitions/131215/signatures/new";
+                        String url = getString(R.string.signPetitionLink);
                         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                         builder.setToolbarColor(ActivityCompat.getColor(MainActivity.this,R.color.colorPrimary));
                         CustomTabsIntent customTabsIntent = builder.build();
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         // should be a singleton
         client = new OkHttpClient();
         request = new Request.Builder()
-                .url("https://petition.parliament.uk/petitions/131215.json")
+                .url(getString(R.string.petition_link))
                 .build();
 
         mWaveSwipeRefreshLayout.setRefreshing(true);
@@ -272,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            intent.putExtra(Constants.KEY_EU_REF_OBJECT,mEURefData);
             startActivity(intent);
             return true;
         }

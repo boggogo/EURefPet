@@ -14,9 +14,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import georgikoemdzhiev.eurefpet.R;
+import georgikoemdzhiev.eurefpet.Utils.Constants;
+import georgikoemdzhiev.eurefpet.Utils.EURefData;
 
 public class AboutActivity extends AppCompatActivity {
-
+    private EURefData mEURefData;
+    private FloatingActionButton fab;
+    private TextView mLink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,18 +28,36 @@ public class AboutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String version = ":";
-        PackageInfo pInfo = null;
-        try {
-            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+        setAppVersion();
+        setUpFabButton();
+        setUpLinkTextView();
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            mEURefData = (EURefData) extras.getSerializable(Constants.KEY_EU_REF_OBJECT);
+        }else{
+
         }
-        version = pInfo.versionName;
 
-        ((TextView)findViewById(R.id.version)).setText("Version: " + version);
+    }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+    private void setUpLinkTextView() {
+        mLink = ((TextView)findViewById(R.id.link));
+        mLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://petition.parliament.uk/petitions/131215";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(ActivityCompat.getColor(AboutActivity.this,R.color.colorPrimary));
+
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(AboutActivity.this, Uri.parse(url));
+            }
+        });
+    }
+
+    private void setUpFabButton() {
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,19 +70,19 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    private void setAppVersion() {
+        String version = ":";
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        version = pInfo.versionName;
 
-        ((TextView)findViewById(R.id.link)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://petition.parliament.uk/petitions/131215";
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                builder.setToolbarColor(ActivityCompat.getColor(AboutActivity.this,R.color.colorPrimary));
-
-                CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(AboutActivity.this, Uri.parse(url));
-            }
-        });
+        ((TextView)findViewById(R.id.version)).setText("Version: " + version);
     }
 
 }
