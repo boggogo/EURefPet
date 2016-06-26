@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Petition created by William Oliver Healey"
+        android:text="@string/petition_created_by"
         android:textColor="@color/semiBlack"
         android:textSize="13sp"/>
 

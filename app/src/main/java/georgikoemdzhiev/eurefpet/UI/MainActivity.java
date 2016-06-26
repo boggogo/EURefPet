@@ -1,15 +1,12 @@
 package georgikoemdzhiev.eurefpet.UI;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,7 +43,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements Callback {
-    private TextView mSigCount;
+    private TextView mSigCount, mCreatedBy;
     private EURefData mEURefData;
     private String TAG = MainActivity.class.getSimpleName();
     private Request request;
@@ -88,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
                         customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
                     }
                 });
-        Drawable fabDrawable = fab.getDrawable();
-        DrawableCompat.setTint(fabDrawable, Color.WHITE);
+//        Drawable fabDrawable = fab.getDrawable();
+//        DrawableCompat.setTint(fabDrawable, Color.WHITE);
 
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 new Task().execute();
             }
         });
-
+        mCreatedBy = (TextView)findViewById(R.id.createdBy);
         mSigCount = (TextView) findViewById(R.id.signatureCount);
         mSigCount.setOnClickListener(swipeToRefreshgListener);
         findViewById(R.id.text).setOnClickListener(swipeToRefreshgListener);
@@ -171,16 +168,6 @@ public class MainActivity extends AppCompatActivity implements Callback {
         euRefAttr.setAdditional_details(attrJsonData.getString("additional_details"));
         euRefAttr.setState(attrJsonData.getString("state"));
         euRefAttr.setSignature_count(attrJsonData.getInt("signature_count"));
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                DecimalFormat formatter = new DecimalFormat("#,###");
-                String formatted = formatter.format(euRefAttr.getSignature_count());
-                mSigCount.setText(formatted);
-            }
-        });
-
         euRefAttr.setCreated_at(getDateFromString(attrJsonData.getString("created_at")));
         euRefAttr.setUpdated_at(getDateFromString(attrJsonData.getString("updated_at")));
         euRefAttr.setOpen_at(getDateFromString(attrJsonData.getString("open_at")));
@@ -206,6 +193,16 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
         // set attrs object to EURefData...
         mEURefData.setAttributes(euRefAttr);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                DecimalFormat formatter = new DecimalFormat("#,###");
+                String formatted = formatter.format(euRefAttr.getSignature_count());
+                mSigCount.setText(formatted);
+                mCreatedBy.setText("Petition created by " + euRefAttr.getCreator_name());
+            }
+        });
     }
 
     private ArrayList<EURefConstituency> setUpAndAddSigByConstituency(JSONArray signatures_by_constituency) throws JSONException {
