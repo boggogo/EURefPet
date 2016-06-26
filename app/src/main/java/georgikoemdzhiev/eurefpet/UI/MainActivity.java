@@ -6,7 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -80,9 +82,10 @@ public class MainActivity extends AppCompatActivity implements Callback {
                     @Override
                     public void onClick(View view) {
                         String url = "https://petition.parliament.uk/petitions/131215/signatures/new";
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
+                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                        builder.setToolbarColor(ActivityCompat.getColor(MainActivity.this,R.color.colorPrimary));
+                        CustomTabsIntent customTabsIntent = builder.build();
+                        customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
                     }
                 });
         Drawable fabDrawable = fab.getDrawable();

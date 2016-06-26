@@ -5,7 +5,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -47,13 +49,16 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
+
         ((TextView)findViewById(R.id.link)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String url = "https://petition.parliament.uk/petitions/131215";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(ActivityCompat.getColor(AboutActivity.this,R.color.colorPrimary));
+
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(AboutActivity.this, Uri.parse(url));
             }
         });
     }
