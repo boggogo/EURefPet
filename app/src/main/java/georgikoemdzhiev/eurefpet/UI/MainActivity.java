@@ -43,7 +43,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements Callback {
-    private TextView mSigCount, mCreatedBy;
+    private TextView mSigCount, mCreatedBy, mDebateDate, mGovernmentResponse;
     private EURefData mEURefData;
     private String TAG = MainActivity.class.getSimpleName();
     private Request request;
@@ -64,34 +64,36 @@ public class MainActivity extends AppCompatActivity implements Callback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
 //                Bundle extras = new Bundle();
-                intent.putExtra(Constants.KEY_EU_REF_OBJECT,mEURefData);
-                if(finishedLoadingData) {
+                intent.putExtra(Constants.KEY_EU_REF_OBJECT, mEURefData);
+                if (finishedLoadingData) {
                     startActivity(new Intent(intent));
-                }else {
+                } else {
                     showToastMessage("No data to show!");
                 }
             }
         });
+        mDebateDate = (TextView) findViewById(R.id.scheduled_debate_date);
+        mGovernmentResponse = (TextView) findViewById(R.id.government_response);
         mSignButton = (Button) findViewById(R.id.signBtn);
         mSignButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String url = getString(R.string.signPetitionLink);
-                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                        builder.setToolbarColor(ActivityCompat.getColor(MainActivity.this,R.color.colorPrimary));
-                        CustomTabsIntent customTabsIntent = builder.build();
-                        customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
-                    }
-                });
+            @Override
+            public void onClick(View view) {
+                String url = getString(R.string.signPetitionLink);
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(ActivityCompat.getColor(MainActivity.this, R.color.colorPrimary));
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
+            }
+        });
 //        Drawable fabDrawable = fab.getDrawable();
 //        DrawableCompat.setTint(fabDrawable, Color.WHITE);
 
 
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
 //        mWaveSwipeRefreshLayout.setColorSchemeColors(android.R.color.white, R.color.colorPrimary);
-        mWaveSwipeRefreshLayout.setWaveARGBColor(255,0,100,0);
+        mWaveSwipeRefreshLayout.setWaveARGBColor(255, 0, 100, 0);
 //        mWaveSwipeRefreshLayout.setBackgroundColor(getResources().getColor(android.R.color.white,getTheme()));
 
         mWaveSwipeRefreshLayout.setOnRefreshListener(new WaveSwipeRefreshLayout.OnRefreshListener() {
@@ -103,10 +105,10 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 new Task().execute();
             }
         });
-        mCreatedBy = (TextView)findViewById(R.id.createdBy);
+        mCreatedBy = (TextView) findViewById(R.id.createdBy);
         mSigCount = (TextView) findViewById(R.id.signatureCount);
         mSigCount.setOnClickListener(swipeToRefreshgListener);
-        findViewById(R.id.text).setOnClickListener(swipeToRefreshgListener);
+        findViewById(R.id.signaturesLabel).setOnClickListener(swipeToRefreshgListener);
         mEURefData = new EURefData();
 
 
@@ -201,11 +203,24 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 String formatted = formatter.format(euRefAttr.getSignature_count());
                 mSigCount.setText(formatted);
                 mCreatedBy.setText("Petition created by " + euRefAttr.getCreator_name());
+                if (!euRefAttr.getGovernment_response().equals("null")) {
+                    mGovernmentResponse.setText(euRefAttr.getGovernment_response());
+                }else{
+                    // set text to waiting result...
+                    mGovernmentResponse.setText(getString(R.string.waitingForGovernmentResponse));
+                }
+                if (euRefAttr.getScheduled_debate_date() != null) {
+                    mDebateDate.setText(getFormattedDateFromDateObject(euRefAttr.getScheduled_debate_date()));
+                }else{
+                    // set text to waiting result...
+                    mDebateDate.setText(getString(R.string.waitingForDebateDate));
+                }
             }
         });
     }
 
-    private ArrayList<EURefConstituency> setUpAndAddSigByConstituency(JSONArray signatures_by_constituency) throws JSONException {
+    private ArrayList<EURefConstituency> setUpAndAddSigByConstituency(JSONArray
+                                                                              signatures_by_constituency) throws JSONException {
         ArrayList<EURefConstituency> sigByConstituencies = new ArrayList<>();
         JSONArray sigbyConstituencyJsonArray = signatures_by_constituency;
 
@@ -224,7 +239,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
         return sigByConstituencies;
     }
 
-    private ArrayList<EURefCountry> setUpAndAddSigByCountry(JSONArray signatures_by_country) throws JSONException {
+    private ArrayList<EURefCountry> setUpAndAddSigByCountry(JSONArray
+                                                                    signatures_by_country) throws JSONException {
         ArrayList<EURefCountry> sigByContries = new ArrayList<>();
         JSONArray signatureByContries = signatures_by_country;
 
@@ -241,6 +257,11 @@ public class MainActivity extends AppCompatActivity implements Callback {
         }
 
         return sigByContries;
+    }
+
+    private String getFormattedDateFromDateObject(Date d) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
+        return inputFormat.format(d);
     }
 
     private Date getDateFromString(String created_at) throws ParseException {
@@ -271,8 +292,8 @@ public class MainActivity extends AppCompatActivity implements Callback {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
-            intent.putExtra(Constants.KEY_EU_REF_OBJECT,mEURefData);
+            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+            intent.putExtra(Constants.KEY_EU_REF_OBJECT, mEURefData);
             startActivity(intent);
             return true;
         }
@@ -324,12 +345,12 @@ public class MainActivity extends AppCompatActivity implements Callback {
         }
 
 
-       runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               mWaveSwipeRefreshLayout.setRefreshing(false);
-           }
-       });
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mWaveSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 

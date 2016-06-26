@@ -203,7 +203,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/scheduledDebateDateCont"
+                android:id="@+id/governmentResponseCont"
                 android:layout_marginTop="1dp"
                 android:layout_below="@id/governmentRespondedAtCont"
                 android:weightSum="3"
@@ -227,7 +227,7 @@
             <LinearLayout
                 android:id="@+id/rejectedAtCont"
                 android:layout_marginTop="1dp"
-                android:layout_below="@id/scheduledDebateDateCont"
+                android:layout_below="@id/governmentResponseCont"
                 android:weightSum="3"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
