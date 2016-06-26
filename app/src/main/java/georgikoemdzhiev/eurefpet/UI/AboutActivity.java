@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import georgikoemdzhiev.eurefpet.R;
 import georgikoemdzhiev.eurefpet.Utils.Constants;
 import georgikoemdzhiev.eurefpet.Utils.EURefData;
@@ -21,7 +24,8 @@ import georgikoemdzhiev.eurefpet.Utils.EuRefAttr;
 public class AboutActivity extends AppCompatActivity {
     private EURefData mEURefData;
     private FloatingActionButton fab;
-    private TextView mLink,mCreatedAt, mUpdatedAt, mOpenAt, mClosedAt, mGovernmentResponseAt,mScheduledDebateDate, mRejectedAt, mDebateOutcomeAt;
+    private TextView mLink, mCreatedAt, mUpdatedAt, mOpenAt, mClosedAt, mGovernmentResponseAt, mScheduledDebateDate, mRejectedAt, mDebateOutcomeAt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,53 +39,58 @@ public class AboutActivity extends AppCompatActivity {
         setUpViews();
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             mEURefData = (EURefData) extras.getSerializable(Constants.KEY_EU_REF_OBJECT);
-            if(mEURefData.getAttributes() != null) {
+            if (mEURefData.getAttributes() != null) {
                 EuRefAttr euRefAttr = mEURefData.getAttributes();
                 if (euRefAttr.getCreated_at() != null)
-                    mCreatedAt.setText(euRefAttr.getCreated_at().toString());
+                    mCreatedAt.setText(getFormattedDateFromDateObject(euRefAttr.getCreated_at()));
                 if (euRefAttr.getUpdated_at() != null)
-                    mUpdatedAt.setText(euRefAttr.getUpdated_at().toString());
+                    mUpdatedAt.setText(getFormattedDateFromDateObject(euRefAttr.getUpdated_at()));
                 if (euRefAttr.getOpen_at() != null)
-                    mOpenAt.setText(euRefAttr.getOpen_at().toString());
+                    mOpenAt.setText(getFormattedDateFromDateObject(euRefAttr.getOpen_at()));
                 if (euRefAttr.getGovernment_response_at() != null)
                     if (euRefAttr.getGovernment_response_at() != null)
-                        mGovernmentResponseAt.setText(euRefAttr.getGovernment_response_at().toString());
+                        mGovernmentResponseAt.setText(getFormattedDateFromDateObject(euRefAttr.getGovernment_response_at()));
                 if (euRefAttr.getScheduled_debate_date() != null)
-                    mScheduledDebateDate.setText(euRefAttr.getScheduled_debate_date().toString());
+                    mScheduledDebateDate.setText(getFormattedDateFromDateObject(euRefAttr.getScheduled_debate_date()));
                 if (euRefAttr.getRejected_at() != null)
-                    mRejectedAt.setText(euRefAttr.getRejected_at().toString());
+                    mRejectedAt.setText(getFormattedDateFromDateObject(euRefAttr.getRejected_at()));
                 if (euRefAttr.getDebate_outcome_at() != null)
-                    mDebateOutcomeAt.setText(euRefAttr.getDebate_outcome_at().toString());
+                    mDebateOutcomeAt.setText(getFormattedDateFromDateObject(euRefAttr.getDebate_outcome_at()));
                 if (euRefAttr.getClosed_at() != null)
-                    mClosedAt.setText(euRefAttr.getClosed_at().toString());
+                    mClosedAt.setText(getFormattedDateFromDateObject(euRefAttr.getClosed_at()));
             }
-        }else{
+        } else {
 
         }
 
     }
 
+    private String getFormattedDateFromDateObject(Date d) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss a");
+        return inputFormat.format(d);
+    }
+
     private void setUpViews() {
-        mCreatedAt = (TextView)findViewById(R.id.createdAt);
-        mClosedAt = (TextView)findViewById(R.id.closedAt);
-        mUpdatedAt = (TextView)findViewById(R.id.updatedAt);
-        mOpenAt = (TextView)findViewById(R.id.openAt);
-        mGovernmentResponseAt = (TextView)findViewById(R.id.government_response_at);
-        mScheduledDebateDate = (TextView)findViewById(R.id.scheduled_debate_date);
-        mRejectedAt = (TextView)findViewById(R.id.rejected_at);
-        mDebateOutcomeAt = (TextView)findViewById(R.id.debate_outcome_at);
+        mCreatedAt = (TextView) findViewById(R.id.createdAt);
+        mClosedAt = (TextView) findViewById(R.id.closedAt);
+        mUpdatedAt = (TextView) findViewById(R.id.updatedAt);
+        mOpenAt = (TextView) findViewById(R.id.openAt);
+        mGovernmentResponseAt = (TextView) findViewById(R.id.government_response_at);
+        mScheduledDebateDate = (TextView) findViewById(R.id.scheduled_debate_date);
+        mRejectedAt = (TextView) findViewById(R.id.rejected_at);
+        mDebateOutcomeAt = (TextView) findViewById(R.id.debate_outcome_at);
     }
 
     private void setUpLinkTextView() {
-        mLink = ((TextView)findViewById(R.id.link));
+        mLink = ((TextView) findViewById(R.id.link));
         mLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String url = "https://petition.parliament.uk/petitions/131215";
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                builder.setToolbarColor(ActivityCompat.getColor(AboutActivity.this,R.color.colorPrimary));
+                builder.setToolbarColor(ActivityCompat.getColor(AboutActivity.this, R.color.colorPrimary));
 
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.launchUrl(AboutActivity.this, Uri.parse(url));
@@ -115,7 +124,7 @@ public class AboutActivity extends AppCompatActivity {
         }
         version = pInfo.versionName;
 
-        ((TextView)findViewById(R.id.version)).setText("Version: " + version);
+        ((TextView) findViewById(R.id.version)).setText("Version: " + version);
     }
 
 }
