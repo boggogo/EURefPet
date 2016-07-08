@@ -44,6 +44,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements Callback {
     private TextView mSigCount, mCreatedBy, mDebateDate, mGovernmentResponse;
+    private String governmentResponse = "";
     private EURefData mEURefData;
     private String TAG = MainActivity.class.getSimpleName();
     private Request request;
@@ -76,6 +77,14 @@ public class MainActivity extends AppCompatActivity implements Callback {
         });
         mDebateDate = (TextView) findViewById(R.id.scheduled_debate_date);
         mGovernmentResponse = (TextView) findViewById(R.id.government_response);
+        mGovernmentResponse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Show dialog
+                GovernmentResponseDialog dialog = GovernmentResponseDialog.newInstance(governmentResponse);
+                dialog.show(getFragmentManager(),"Dialog_government_response");
+            }
+        });
         mSignButton = (Button) findViewById(R.id.signBtn);
         mSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements Callback {
         euRefAttr.setResponse_threshold_reached_at(getDateFromString(attrJsonData.getString("response_threshold_reached_at")));
         euRefAttr.setCreator_name(attrJsonData.getString("creator_name"));
         euRefAttr.setRejection(attrJsonData.getString("rejection"));
-        euRefAttr.setGovernment_response(attrJsonData.getString("government_response"));
+        euRefAttr.setGovernment_response(attrJsonData.getJSONObject("government_response").getString("details"));
         euRefAttr.setDebate(attrJsonData.getString("debate"));
 
         ArrayList<EURefCountry> sigByCountries = setUpAndAddSigByCountry(attrJsonData.getJSONArray("signatures_by_country"));
@@ -203,8 +212,12 @@ public class MainActivity extends AppCompatActivity implements Callback {
                 String formatted = formatter.format(euRefAttr.getSignature_count());
                 mSigCount.setText(formatted);
                 mCreatedBy.setText("Petition created by " + euRefAttr.getCreator_name());
+
                 if (!euRefAttr.getGovernment_response().equals("null")) {
-                    mGovernmentResponse.setText(euRefAttr.getGovernment_response());
+//                    mGovernmentResponse.setText(euRefAttr.getGovernment_response());
+//                    JSONObject response = euRefAttr.getGovernment_response();
+
+                    governmentResponse = euRefAttr.getGovernment_response();
                 }else{
                     // set text to waiting result...
                     mGovernmentResponse.setText(getString(R.string.waitingForGovernmentResponse));

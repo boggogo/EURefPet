@@ -12,6 +12,6 @@
     <string name="signPetitionLink">https://petition.parliament.uk/petitions/131215/signatures/new</string>
     <string name="petition_link">https://petition.parliament.uk/petitions/131215.json</string>
     <string name="n_a">N/A</string>
-    <string name="waitingForGovernmentResponse">Waiting for a government response</string>
+    <string name="waitingForGovernmentResponse"><u>View response</u></string>
     <string name="waitingForDebateDate">Waiting for a debate date</string>
 </resources>
